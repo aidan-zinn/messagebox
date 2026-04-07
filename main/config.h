@@ -1,7 +1,7 @@
 #pragma once
 
 // I2C (OLED)
-#define PIN_I2C_SDA         4
+#define PIN_I2C_SDA         0
 #define PIN_I2C_SCL         5
 #define OLED_I2C_ADDR       0x3C
 #define OLED_I2C_FREQ_HZ    400000
