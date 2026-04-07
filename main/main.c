@@ -6,6 +6,7 @@
 #include "config.h"
 #include "ssd1306.h"
 #include "servo.h"
+#include "wifi.h"
 
 static const char *TAG = "messagebox";
 
@@ -31,20 +32,15 @@ void app_main(void)
     ESP_ERROR_CHECK(ssd1306_init(&oled, bus, OLED_I2C_ADDR));
     ESP_LOGI(TAG, "OLED initialized");
 
-    ssd1306_draw_string(&oled, 0, 0, "Hello World");
-    ssd1306_draw_string(&oled, 0, 16, "Hello World");
-    ESP_ERROR_CHECK(ssd1306_flush(&oled));
+    ssd1306_draw_string(&oled, 0, 0, "Connecting...");
+    ssd1306_flush(&oled);
 
-    // Init servo
-    ESP_ERROR_CHECK(servo_init(PIN_SERVO));
-    ESP_LOGI(TAG, "Servo initialized");
+    // Connect to WiFi
+    ESP_ERROR_CHECK(wifi_init_sta());
 
-    // Test: spin CW for 2 seconds, then stop
-    ESP_LOGI(TAG, "Servo test: spinning...");
-    servo_set_pulse_us(1000);
-    vTaskDelay(pdMS_TO_TICKS(2000));
-    servo_stop();
-    ESP_LOGI(TAG, "Servo test done");
+    ssd1306_clear(&oled);
+    ssd1306_draw_string(&oled, 0, 0, "WiFi connected!");
+    ssd1306_flush(&oled);
 
     int count = 0;
     while (1) {
