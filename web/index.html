@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Messagebox" />
+  <meta name="theme-color" content="#1a1a1a" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Messagebox</title>
+</head>
+<body>
+  <main id="app">
+    <section id="unlock-view">
+      <h1>Messagebox</h1>
+      <form id="unlock-form">
+        <input id="password" type="password" autocomplete="current-password" placeholder="Password" required />
+        <button type="submit">Unlock</button>
+      </form>
+      <p id="unlock-error" class="error" hidden>Wrong password.</p>
+    </section>
+
+    <section id="compose-view" hidden>
+      <header>
+        <h1>Messagebox</h1>
+        <span id="status" class="status">connecting&hellip;</span>
+      </header>
+      <form id="send-form">
+        <textarea id="message" maxlength="240" placeholder="Write something lovely&hellip;" required></textarea>
+        <div class="row">
+          <span id="counter">0 / 240</span>
+          <button id="send-btn" type="submit" disabled>Send</button>
+        </div>
+      </form>
+      <h2>History</h2>
+      <ul id="history"></ul>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

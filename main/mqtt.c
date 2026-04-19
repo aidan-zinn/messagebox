@@ -5,6 +5,9 @@
 static const char *TAG = "mqtt";
 static mqtt_message_cb_t s_message_cb;
 
+extern const uint8_t hivemq_root_ca_pem_start[] asm("_binary_hivemq_root_ca_pem_start");
+extern const uint8_t hivemq_root_ca_pem_end[]   asm("_binary_hivemq_root_ca_pem_end");
+
 static void mqtt_event_handler(void *arg, esp_event_base_t base,
                                int32_t event_id, void *event_data)
 {
@@ -38,7 +41,14 @@ esp_err_t mqtt_start(mqtt_message_cb_t cb)
     s_message_cb = cb;
 
     esp_mqtt_client_config_t mqtt_cfg = {
-        .broker.address.uri = CONFIG_MQTT_BROKER_URI,
+        .broker = {
+            .address.uri = CONFIG_MQTT_BROKER_URI,
+            .verification.certificate = (const char *)hivemq_root_ca_pem_start,
+        },
+        .credentials = {
+            .username = CONFIG_MQTT_USERNAME,
+            .authentication.password = CONFIG_MQTT_PASSWORD,
+        },
     };
 
     esp_mqtt_client_handle_t client = esp_mqtt_client_init(&mqtt_cfg);

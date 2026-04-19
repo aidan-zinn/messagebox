@@ -1,0 +1,27 @@
+menu "Messagebox Configuration"
+
+    config WIFI_SSID
+        string "WiFi SSID"
+        default "YOUR_WIFI_SSID"
+
+    config WIFI_PASSWORD
+        string "WiFi Password"
+        default "YOUR_WIFI_PASSWORD"
+
+    config MQTT_BROKER_URI
+        string "MQTT Broker URI"
+        default "mqtts://YOUR_CLUSTER.hivemq.cloud:8883"
+
+    config MQTT_USERNAME
+        string "MQTT Username"
+        default "messagebox"
+
+    config MQTT_PASSWORD
+        string "MQTT Password"
+        default "YOUR_MQTT_PASSWORD"
+
+    config MQTT_TOPIC
+        string "MQTT Topic"
+        default "messagebox/message"
+
+endmenu
